@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class ObstacleSpawner : MonoBehaviour
 {
@@ -9,9 +8,16 @@ public class ObstacleSpawner : MonoBehaviour
     private Color obstacleColor = new Color(0, 0, 0);
     private float colorChanger = 0;
     private Coroutine spawner;
+    public ObstaclePooling obstaclePooling;
+
+    private void Awake()
+    {
+        obstaclePooling = GetComponent<ObstaclePooling>() ?? gameObject.AddComponent<ObstaclePooling>();
+    }
 
     void Start()
     {
+        obstaclePooling.obstacle = obstacle.gameObject;
         GameManager.instance.OnGameStarted += () =>
         {
             spawner = StartCoroutine(nameof(SpawnObstacles));
@@ -19,6 +25,7 @@ public class ObstacleSpawner : MonoBehaviour
         GameManager.instance.OnGameEnded += () =>
         {
             StopCoroutine(spawner);
+            obstaclePooling.SetAllObstaclesSetActive(false);
         }; ;
     }
 
@@ -33,9 +40,11 @@ public class ObstacleSpawner : MonoBehaviour
 
             foreach (var item in spawnPoints)
             {
-                Obstacle obstacle =
+                Obstacle obstacle = obstaclePooling.InstantiateObstacle().GetComponent<Obstacle>();
+                obstacle.gameObject.SetActive(true);
                 obstacle.transform.SetParent(item.transform);
                 obstacle.transform.position = item.transform.position;
+                obstacle.obstacleSpawner = this;
                 obstacle.MoveUp();
                 obstacle.SetColor(obstacleColor);
             }
