@@ -1,24 +1,72 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class ObstacleSpawner : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private GameObject obstacle;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Obstacle obstacle;
+    private Color obstacleColor = new Color(0, 0, 0);
+    private float colorChanger = 0;
+    private ObjectPool<Obstacle> _pool;
+    private Coroutine spawner;
+
+    private void Awake()
     {
-        InvokeRepeating(nameof(SpawnObstacles), 1, 1);
+        _pool = new ObjectPool<Obstacle>(CreateBullet, OnTakeObstacleFromPool, OnReturnObstacleToPool, OnDestroyObstacle, true, 10, 1000);
     }
 
-    private void SpawnObstacles()
+    private void OnDestroyObstacle(Obstacle obstacle)
     {
-        Destroy(Instantiate(obstacle, spawnPoints[0]), 5);
-        Destroy(Instantiate(obstacle, spawnPoints[1]), 5);
-        Destroy(Instantiate(obstacle, spawnPoints[2]), 5);
-        Destroy(Instantiate(obstacle, spawnPoints[3]), 5);
-        Destroy(Instantiate(obstacle, spawnPoints[4]), 5);
+        Destroy(obstacle.gameObject);
+    }
+
+    public void OnReturnObstacleToPool(Obstacle obstacle)
+    {
+        obstacle.gameObject.SetActive(false);
+    }
+    private void OnTakeObstacleFromPool(Obstacle obstacle)
+    {
+        obstacle.gameObject.SetActive(true);
+    }
+
+    private Obstacle CreateBullet()
+    {
+        Obstacle obstacles = Instantiate(obstacle);
+        obstacles.SetPool(_pool);
+        return obstacles;
+    }
+
+    void Start()
+    {
+        GameManager.instance.OnGameStarted += () =>
+        {
+            spawner = StartCoroutine(nameof(SpawnObstacles));
+        }; ;
+        GameManager.instance.OnGameEnded += () =>
+        {
+            StopCoroutine(spawner);
+        }; ;
+    }
+
+    public IEnumerator SpawnObstacles()
+    {
+        while (GameManager.instance.GameState == GameManager.State.Started)
+        {
+            yield return new WaitForSeconds(1f);
+            colorChanger += 0.1f;
+            obstacleColor = new Color(colorChanger, colorChanger, colorChanger);
+            if (colorChanger >= 1) colorChanger = 0;
+
+            foreach (var item in spawnPoints)
+            {
+                Obstacle obstacle = _pool.Get();
+                obstacle.transform.SetParent(item.transform);
+                obstacle.transform.position = item.transform.position;
+                obstacle.MoveUp();
+                obstacle.SetColor(obstacleColor);
+            }
+            Debug.Log("a");
+        }
     }
 }
