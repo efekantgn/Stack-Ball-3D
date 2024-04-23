@@ -1,10 +1,9 @@
-using System;
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    public float moveSpeed = 10f;
     public ObstacleSpawner obstacleSpawner;
 
     private void Start()
@@ -14,11 +13,10 @@ public class Obstacle : MonoBehaviour
 
     private void GameEnded()
     {
-        DOTween.Kill(this, true);
-        transform.position = new Vector3(0, 0, 0);
+        DOTween.Kill(transform, false);
     }
 
-    public void MoveUp()
+    public void MoveUp(float moveSpeed)
     {
         transform.DOMoveY(10, 100 / moveSpeed).SetEase(Ease.Linear).OnComplete(() => obstacleSpawner.obstaclePooling.UninstantiateObstacle(gameObject, 0));
     }
@@ -27,6 +25,4 @@ public class Obstacle : MonoBehaviour
     {
         GetComponent<Renderer>().material.color = color;
     }
-
-
 }
