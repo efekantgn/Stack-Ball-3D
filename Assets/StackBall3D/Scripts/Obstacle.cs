@@ -18,7 +18,7 @@ public class Obstacle : MonoBehaviour
 
     public void MoveUp(float moveSpeed)
     {
-        transform.DOMoveY(10, 100 / moveSpeed).SetEase(Ease.Linear).OnComplete(() => obstacleSpawner.obstaclePooling.UninstantiateObstacle(gameObject, 0));
+        transform.DOMoveY(10, moveSpeed).SetEase(Ease.Linear).OnComplete(() => obstacleSpawner.obstaclePooling.UninstantiateObstacle(gameObject, 0));
     }
 
     public void SetColor(Color color)
