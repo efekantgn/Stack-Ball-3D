@@ -16,12 +16,12 @@ public class BallMovement : MonoBehaviour
     {
         if (GameManager.instance.GameState != GameManager.State.Started) return;
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && transform.position.x > -5)
         {
             MoveLeft();
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) && transform.position.x < 5)
         {
             MoveRight();
         }
