@@ -455,8 +455,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80649854}
-  m_LocalRotation: {x: 0.13103296, y: -0.00000001705803, z: 0.0000000022546036, w: 0.991378}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: 0.13103296, y: -0.000000017058026, z: 0.0000000022546032, w: 0.991378}
+  m_LocalPosition: {x: 0, y: 0, z: -14.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -953,8 +953,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.13103296, y: -0.00000001705803, z: 0.0000000022546036, w: 0.991378}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: 0.13103296, y: -0.000000017058026, z: 0.0000000022546032, w: 0.991378}
+  m_LocalPosition: {x: 0, y: 0, z: -14.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6125,6 +6125,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942995625}
   m_CullTransparentMesh: 1
+--- !u!1 &1984016446 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8312923681320139829, guid: 6af805ba8c3184b48872f3e9020a5b2b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8312923679774451325}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1984016451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984016446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1551a4a9ee713048b442b444050a87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2012909648
 GameObject:
   m_ObjectHideFlags: 0
@@ -6225,6 +6243,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8312923681320139830, guid: 6af805ba8c3184b48872f3e9020a5b2b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: db96e04f47f6c2a44bc6bb90f93602ec, type: 2}
     - target: {fileID: 8312923681660481996, guid: 6af805ba8c3184b48872f3e9020a5b2b,
         type: 3}
       propertyPath: m_RootOrder
