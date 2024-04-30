@@ -9,7 +9,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreTMP;
     [SerializeField] private TextMeshProUGUI endScoreTMP;
     [SerializeField] private TextMeshProUGUI usernameTMP;
-    [SerializeField] private TextMeshProUGUI rankTMP;
+    [SerializeField] private UserData userDataSO;
     private int SurviveTime;
     [SerializeField] private Leaderboard leaderboard;
 
@@ -23,11 +23,12 @@ public class ScoreManager : MonoBehaviour
     private void GameEnded()
     {
         endScoreTMP.text = SurviveTime.ToString();
-        leaderboard.SetLeaderboardEntry(usernameTMP.text, int.Parse(endScoreTMP.text));
+        leaderboard.SetLeaderboardEntry(userDataSO.Username, int.Parse(endScoreTMP.text));
     }
 
     private void GameStarted()
     {
+        scoreTMP.text = "";
         StartCoroutine(nameof(IncreaseTimer));
         UpdateSurviveTime(0);
     }

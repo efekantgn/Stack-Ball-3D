@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject InGameUI;
     public GameObject EndGameUI;
+    public GameObject StartInstructor;
 
 
     private void Awake()
@@ -42,8 +43,7 @@ public class GameManager : MonoBehaviour
     private void EndGame()
     {
         GameState = State.Ended;
-        EndGameUI.SetActive(true);
-        InGameUI.SetActive(false);
+        ResetUI(false);
     }
 
     private void Update()
@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+                StartInstructor.SetActive(false);
                 GameState = State.Started;
                 OnGameStarted?.Invoke();
             }
@@ -60,8 +61,13 @@ public class GameManager : MonoBehaviour
     public void SetGameState(int enumValue)
     {
         GameState = (State)enumValue;
-        EndGameUI.SetActive(false);
-        InGameUI.SetActive(true);
+        ResetUI(true);
     }
 
+    private void ResetUI(bool isGameEnded)
+    {
+        EndGameUI.SetActive(!isGameEnded);
+        InGameUI.SetActive(isGameEnded);
+        StartInstructor.SetActive(isGameEnded);
+    }
 }

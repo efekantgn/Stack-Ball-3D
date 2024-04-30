@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8312923681320139825}
   - component: {fileID: 8312923681320139830}
   - component: {fileID: 8312923681320139831}
+  - component: {fileID: 1984016451}
   m_Layer: 0
   m_Name: Ball Model
   m_TagString: Untagged
@@ -62,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: db96e04f47f6c2a44bc6bb90f93602ec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -97,6 +98,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1984016451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8312923681320139829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1551a4a9ee713048b442b444050a87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RotateAmount: {x: -100, y: 0, z: 0}
 --- !u!1 &8312923681660481997
 GameObject:
   m_ObjectHideFlags: 0

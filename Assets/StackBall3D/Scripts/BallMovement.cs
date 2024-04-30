@@ -31,22 +31,22 @@ public class BallMovement : MonoBehaviour
         {
             endTouchPos = Input.GetTouch(0).position;
 
-            if (endTouchPos.x < startTouchPos.x && transform.position.x > -5)
+            if (endTouchPos.x < startTouchPos.x)
             {
                 MoveLeft();
             }
-            if (endTouchPos.x > startTouchPos.x && transform.position.x < 5)
+            if (endTouchPos.x > startTouchPos.x)
             {
                 MoveRight();
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && transform.position.x > -5)
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             MoveLeft();
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) && transform.position.x < 5)
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             MoveRight();
         }
@@ -54,17 +54,19 @@ public class BallMovement : MonoBehaviour
 
     private void MoveRight()
     {
-        OnBallMoveRight?.Invoke();
-        //transform.position += Vector3.right * movementMultiplier;
         float endXpos = transform.position.x + movementMultiplier;
-        transform.DOMoveX(endXpos, .2f);
+        if (endXpos > 6) return;
+
+        OnBallMoveRight?.Invoke();
+        transform.DOMoveX(endXpos, .1f);
     }
 
     private void MoveLeft()
     {
-        OnBallMoveLeft?.Invoke();
-        //transform.position += Vector3.left * movementMultiplier;
         float endXpos = transform.position.x - movementMultiplier;
-        transform.DOMoveX(endXpos, .2f);
+        if (endXpos < -6) return;
+
+        OnBallMoveLeft?.Invoke();
+        transform.DOMoveX(endXpos, .1f);
     }
 }
